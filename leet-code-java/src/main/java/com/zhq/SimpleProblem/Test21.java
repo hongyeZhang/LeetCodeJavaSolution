@@ -8,10 +8,11 @@ package com.zhq.SimpleProblem;
  * @create: 2019-07-02
  **/
 public class Test21 {
-    public static class ListNode{
+    public static class ListNode {
         int val;
         ListNode next;
-        ListNode(int x){
+
+        ListNode(int x) {
             val = x;
         }
     }
@@ -41,12 +42,12 @@ public class Test21 {
 
 
     /**
-    * @Description:  AC
-    * @Param:
-    * @return:
-    * @Author: ZHQ
-    * @Date: 2019-07-02
-    */
+     * @Description: AC
+     * @Param:
+     * @return:
+     * @Author: ZHQ
+     * @Date: 2019-07-02
+     */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode ret = new ListNode(0);
         ListNode head = ret;
@@ -79,8 +80,6 @@ public class Test21 {
             temp = temp.next;
         }
     }
-
-
 
 
 }
