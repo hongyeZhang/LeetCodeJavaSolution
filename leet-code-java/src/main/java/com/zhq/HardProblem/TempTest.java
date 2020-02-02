@@ -12,11 +12,18 @@ import java.util.List;
 public class TempTest {
 
     public static void main(String[] args) {
-        List<Boolean> list = new ArrayList<>(10);
-        list.set(0, true);
-        list.set(8, false);
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("d");
 
         System.out.println(list);
+        List<String> subList = list.subList(1, list.size());
+        System.out.println(subList);
+
+
+
     }
 
 

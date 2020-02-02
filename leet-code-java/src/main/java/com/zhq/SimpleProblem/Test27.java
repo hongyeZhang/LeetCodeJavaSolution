@@ -9,14 +9,11 @@ package com.zhq.SimpleProblem;
 public class Test27 {
 
     public static void main(String[] args) {
-
         int[] nums = {0, 1, 2, 2, 3, 0, 4, 2};
         int len = removeElement(nums, 2);
         for (int i = 0; i < len; ++i) {
             System.out.print(nums[i] + "\t");
         }
-
-
     }
 
     /**
@@ -37,6 +34,5 @@ public class Test27 {
         }
 
         return len;
-
     }
 }
