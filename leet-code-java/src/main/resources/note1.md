@@ -23,5 +23,10 @@ Boyer-Moore 算法、Simon 算法、Colussi 算法、Galil-Giancarlo 算法、Ap
 
 
 
+### 全排列
+
+
+
+
 
 

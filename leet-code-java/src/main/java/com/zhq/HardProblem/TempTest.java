@@ -12,19 +12,18 @@ import java.util.List;
 public class TempTest {
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
+        String s = "ABABD";
+        String p = "AB";
+        System.out.println(s.indexOf(p));
+        System.out.println(s.lastIndexOf(p));
 
-        System.out.println(list);
-        List<String> subList = list.subList(1, list.size());
-        System.out.println(subList);
+    }
 
+    public static void test() {
 
 
     }
+
 
 
 }
