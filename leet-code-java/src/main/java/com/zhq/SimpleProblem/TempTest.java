@@ -1,8 +1,5 @@
 package com.zhq.SimpleProblem;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @program: LeetCodeTest
  * @description:
@@ -12,15 +9,12 @@ import java.util.Map;
 public class TempTest {
 
     public static void main(String[] args) {
-        for (int i = 0; i < 5; ++i) {
-            System.out.println("i = " + i);
-            for (int j = 0; j < 5; ++j) {
-                System.out.println("j=" + j);
-                if (j == 1) {
-                    break;
-                }
-            }
-        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("1");
+        System.out.println(stringBuilder.toString());
+
+        stringBuilder.delete(0, stringBuilder.length());
+        System.out.println(stringBuilder.toString());
 
 
     }

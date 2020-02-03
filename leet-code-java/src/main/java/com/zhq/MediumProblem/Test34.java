@@ -40,9 +40,9 @@ public class Test34 {
         if (target < nums[0] || target > nums[len - 1]) {
             return new int[]{-1,-1};
         }
+
         int start = -1;
         int end = -1;
-
         int left = 0;
         int right = len - 1;
         while (left <= right) {

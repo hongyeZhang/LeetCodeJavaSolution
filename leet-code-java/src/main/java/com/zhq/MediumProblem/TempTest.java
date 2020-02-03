@@ -11,10 +11,9 @@ import java.util.*;
 public class TempTest {
 
     public static void main(String[] args) {
-        boolean flag1 = true;
-        boolean flag2 = true;
-        boolean flag = flag1 ^ flag2;
-        System.out.println(flag);
+        System.out.println(Character.getNumericValue('9'));
+        System.out.println(Character.getNumericValue('1'));
 
     }
+
 }

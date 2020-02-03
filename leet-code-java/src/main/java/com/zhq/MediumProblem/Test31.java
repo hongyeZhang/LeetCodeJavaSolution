@@ -9,9 +9,9 @@ package com.zhq.MediumProblem;
 public class Test31 {
 
     public static void main(String[] args) {
-//        int[] nums = {1, 2, 3};
+        int[] nums = {1, 2, 3};
 //        int[] nums = {1, 3, 2};
-        int[] nums = {3, 2, 1};
+//        int[] nums = {3, 2, 1};
 
         Test31 test31 = new Test31();
         test31.nextPermutation(nums);
@@ -48,6 +48,10 @@ public class Test31 {
         reverse(nums, i + 1);
     }
 
+    /** 从 start 处开始反转数组，原地反转，不占用额外的空间
+     * @param nums
+     * @param start
+     */
     private void reverse(int[] nums, int start) {
         int i = start, j = nums.length - 1;
         while (i < j) {

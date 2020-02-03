@@ -15,16 +15,10 @@ public class Test39 {
     public static void main(String[] args) {
 
         int[] input = {2, 3, 6, 7};
-
         Test39 test39 = new Test39();
 
-
         List<List<Integer>> list = test39.combinationSum(input, 7);
-        list.forEach(item -> {
-            System.out.println(item);
-        });
-
-
+        list.forEach(System.out::println);
     }
 
 
@@ -36,8 +30,6 @@ public class Test39 {
         Arrays.sort(candidates);
         backtrack(candidates, target, res, 0, new ArrayList<Integer>());
         return res;
-
-
     }
 
     /**
@@ -52,13 +44,11 @@ public class Test39 {
 
         if (begin <= end) {
             int cur = candidates[begin];
-
             if (cur == target) {
                 List<Integer> list1 = new ArrayList<>();
                 list1.add(cur);
                 list.add(list1);
             }
-
             if (cur < target) {
                 for (List<Integer> list1 : combinationSum(candidates, target - cur, begin, end)) {
                     list1.add(cur);
@@ -78,21 +68,16 @@ public class Test39 {
     * @Date: 2019-06-15
     */
     private void backtrack(int[] candidates, int target, List<List<Integer>> res, int i, ArrayList<Integer> tmp_list) {
-        if (target < 0) return;
+        if (target < 0){ return;}
         if (target == 0) {
             res.add(new ArrayList<>(tmp_list));
             return;
         }
         for (int start = i; start < candidates.length; start++) {
-            if (target < candidates[start]) break;
-            System.out.println("start = " + start);
+            if (target < candidates[start]){ break;}
             tmp_list.add(candidates[start]);
-            System.out.println("temp_list = " + tmp_list);
-            System.out.println("new target = " + (target-candidates[start]));
             backtrack(candidates, target - candidates[start], res, start, tmp_list);
-            System.out.println("res = " + res);
             tmp_list.remove(tmp_list.size() - 1);
-            System.out.println("temp_list = " + tmp_list);
         }
     }
 

@@ -20,9 +20,7 @@ public class Test40 {
         Test40 test40 = new Test40();
 //        List<List<Integer>> res = test40.combinationSum2(candidates, target);
         List<List<Integer>> res = test40.combinationSum3(candidates, target);
-        res.forEach(item->{
-            System.out.println(item);
-        });
+        res.forEach(System.out::println);
 
 
     }
@@ -75,8 +73,10 @@ public class Test40 {
             return;
         }
         for (int start = i; start < candidates.length; start++) {
-            if (tmp_sum + candidates[start] > target) break;
-            if (start > i && candidates[start] == candidates[start - 1]) continue;
+            if (tmp_sum + candidates[start] > target){ break;}
+            if (start > i && candidates[start] == candidates[start - 1]) {
+                continue;
+            }
             tmp_list.add(candidates[start]);
             backtrack(res, candidates, target, start + 1, tmp_sum + candidates[start], tmp_list);
             tmp_list.remove(tmp_list.size() - 1);
