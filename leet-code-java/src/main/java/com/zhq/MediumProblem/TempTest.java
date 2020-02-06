@@ -11,8 +11,7 @@ import java.util.*;
 public class TempTest {
 
     public static void main(String[] args) {
-        System.out.println(Character.getNumericValue('9'));
-        System.out.println(Character.getNumericValue('1'));
+        List<List<Integer>> list = new ArrayList<>();
 
     }
 
