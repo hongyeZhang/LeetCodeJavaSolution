@@ -1,5 +1,6 @@
 package com.zhq.regularExpression;
 
+import java.util.ConcurrentModificationException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +23,8 @@ public class Test1 {
 
     public static String patternTest1(String str) {
         String ret = null;
-        String regEx = "^[\\+\\-\\d]\\d*";  // 符号或者数字开头的数字字符串
+        // 符号或者数字开头的数字字符串
+        String regEx = "^[\\+\\-\\d]\\d*";
         Pattern pattern = Pattern.compile(regEx);
         Matcher m = pattern.matcher(str);
         if (m.find()) {
