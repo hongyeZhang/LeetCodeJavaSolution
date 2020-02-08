@@ -10,26 +10,42 @@ import java.util.Stack;
  */
 public class Test47 {
     public static void main(String[] args) {
+        int[] nums = {1, 1, 2};
+        List<List<Integer>> lists = permuteUnique(nums);
+        for (List<Integer> list : lists) {
+            System.out.println(list);
+        }
 
     }
 
-    public List<List<Integer>> permuteUnique(int[] nums) {
+    public static List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         perm(nums, new Stack<>(), res);
         return res;
     }
 
+    /** 在全排列的基础上增加去重的功能
+     * @param array
+     * @param stack
+     * @param res
+     */
     public static void perm(int[] array, Stack<Integer> stack, List<List<Integer>> res) {
         if (array.length <= 0) {
-            //进入了叶子节点，保存栈中内容
+            // 进入了叶子节点，保存栈中内容
             List<Integer> tmpList = new ArrayList<>();
-            // TODO: 2020/2/5
             tmpList.addAll(stack);
-            res.add(tmpList);
+            // 排出重复的组合
+            boolean addFlag = true;
+            for (int i = 0; i < res.size(); ++i) {
+                if (tmpList.equals(res.get(i))) {
+                    addFlag = false;
+                }
+            }
+            if (addFlag) {
+                res.add(tmpList);
+            }
         } else {
             for (int i = 0; i < array.length; i++) {
-                //tmepArray是一个临时数组，用于就是 Ri
-                //eg：1，2，3的全排列，先取出1，那么这时 tempArray 中就是 2，3
                 int[] tempArray = new int[array.length - 1];
                 System.arraycopy(array, 0, tempArray, 0, i);
                 System.arraycopy(array, i + 1, tempArray, i, array.length - i - 1);
