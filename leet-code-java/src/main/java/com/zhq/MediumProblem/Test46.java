@@ -29,6 +29,11 @@ public class Test46 {
     }
 
 
+    /** 全排列
+     * @param array
+     * @param stack
+     * @param res
+     */
     public static void perm(int[] array, Stack<Integer> stack, List<List<Integer>> res) {
         if (array.length <= 0) {
             //进入了叶子节点，保存栈中内容

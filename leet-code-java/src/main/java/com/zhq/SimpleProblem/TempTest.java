@@ -9,12 +9,8 @@ package com.zhq.SimpleProblem;
 public class TempTest {
 
     public static void main(String[] args) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("1");
-        System.out.println(stringBuilder.toString());
+        System.out.println(Integer.MAX_VALUE);
 
-        stringBuilder.delete(0, stringBuilder.length());
-        System.out.println(stringBuilder.toString());
 
 
     }
