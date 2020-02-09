@@ -22,7 +22,7 @@ public class Test50 {
         return fastPow(x, N);
     }
 
-    /** 快速幂计算，需要区分奇、偶
+    /** 递归：快速幂计算，需要区分奇、偶
      * @param x
      * @param n
      * @return
