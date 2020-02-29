@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/
+data-structure-and-algorithm/src/main/resources/
+data-structure-and-algorithm/src/test/
+leet-code-java/.idea/
+leet-code-java/leet-code-java.iml
+leet-code-java/target/classes/META-INF/
+leet-code-java/target/generated-sources/
+target/

@@ -1,6 +1,9 @@
 package datastructure.tree;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Stack;
 
 /**
  * @program: data-structure-and-algorithm
@@ -11,11 +14,8 @@ import java.util.LinkedList;
 public class BinaryTreeTraversal {
     /**
     * @Description:
-     * 二叉树是一种非常重要的数据结构，非常多其他数据结构都是基于二叉树的基础演变而来的。
-     * 对于二叉树，有深度遍历和广度遍历，深度遍历有前序、中序以及后序三种遍历方法，
-     * 广度遍历即我们寻常所说的层次遍历。由于树的定义本身就是递归定义，
-     * 因此採用递归的方法去实现树的三种遍历不仅easy理解并且代码非常简洁，而对于广度遍历来说，
-     * 须要其他数据结构的支撑。比方堆了。所以。对于一段代码来说，可读性有时候要比代码本身的效率要重要的多。
+     * 深度遍历 :前序、中序以及后序
+     * 广度遍历
      * 四种基本的遍历思想为：
      * 前序遍历：根结点 ---> 左子树 ---> 右子树
      * 中序遍历：左子树---> 根结点 ---> 右子树
@@ -23,29 +23,75 @@ public class BinaryTreeTraversal {
      * 层次遍历：仅仅需按层次遍历就可以
     **/
 
+    public static class TreeNode {
+        private int val;
+        private TreeNode left;
+        private TreeNode right;
 
-    public void preOrderTraverse1(TreeNode root) {
-        if (root != null) {
-            System.out.print(root.val+"  ");
-            preOrderTraverse1(root.left);
-            preOrderTraverse1(root.right);
+        TreeNode(int val) {
+            this.val = val;
         }
     }
 
 
-    /**
-    * @Description:  非递归的前序遍历
-    * @Param:
-    * @return:
-    * @Author: ZHQ
-    * @Date: 2019/6/25
-    **/
-    public void preOrderTraverse2(TreeNode root) {
+    /** 递归前序
+     * @param root
+     */
+    public static void preOrderTraverseRecursive(TreeNode root) {
+        if (root != null) {
+            System.out.print(root.val + " ");
+            preOrderTraverseRecursive(root.left);
+            preOrderTraverseRecursive(root.right);
+        }
+    }
+
+    /** 非递归前序1
+     * @param root
+     */
+    public static void preOrderTraverseNonRecursive(TreeNode root) {
+        if (root != null) {
+            Stack<TreeNode> stack = new Stack<>();
+            stack.push(root);
+            while (!stack.empty()) {
+                TreeNode tmpNode = stack.pop();
+                System.out.print(tmpNode.val + " ");
+                if (tmpNode.right != null) {
+                    stack.push(tmpNode.right);
+                }
+                if (tmpNode.left != null) {
+                    stack.push(tmpNode.left);
+                }
+            }
+        }
+    }
+
+    /** 非递归前序2
+     * @param root
+     */
+    public static void preOrderTraverseNonRecursive2(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        while (node != null || !stack.empty()) {
+            if (node != null) {
+                System.out.print(node.val + " ");
+                stack.push(node);
+                node = node.left;
+            } else {
+                node = stack.pop();
+                node = node.right;
+            }
+        }
+    }
+
+    /** 非递归前序遍历
+     * @param root
+     */
+    public void preOrderTraverse(TreeNode root) {
         LinkedList<TreeNode> stack = new LinkedList<>();
         TreeNode pNode = root;
         while (pNode != null || !stack.isEmpty()) {
             if (pNode != null) {
-                System.out.print(pNode.val+"  ");
+                System.out.print(pNode.val + " ");
                 stack.push(pNode);
                 pNode = pNode.left;
             } else { //pNode == null && !stack.isEmpty()
@@ -56,96 +102,163 @@ public class BinaryTreeTraversal {
     }
 
 
-    public void inOrderTraverse1(TreeNode root) {
+    /**
+     * 递归中序遍历
+     * @param root
+     */
+    public static void inOrderTraverseRecursive(TreeNode root) {
         if (root != null) {
-            inOrderTraverse1(root.left);
-            System.out.print(root.val+"  ");
-            inOrderTraverse1(root.right);
+            inOrderTraverseRecursive(root.left);
+            System.out.print(root.val + " ");
+            inOrderTraverseRecursive(root.right);
         }
     }
 
 
-    /**
-    * @Description:  非递归的中序遍历
-    **/
-    public void inOrderTraverse2(TreeNode root) {
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        TreeNode pNode = root;
-        while (pNode != null || !stack.isEmpty()) {
-            if (pNode != null) {
-                stack.push(pNode);
-                pNode = pNode.left;
-            } else { //pNode == null && !stack.isEmpty()
-                TreeNode node = stack.pop();
-                System.out.print(node.val+"  ");
-                pNode = node.right;
+
+    /** 非递归的中序遍历
+     * @param root
+     */
+    public static void inOrderTraverseNonRecursive(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        while (node != null || !stack.empty()) {
+            if (node != null) {
+                stack.push(node);
+                node = node.left;
+            } else {
+                node = stack.pop();
+                System.out.print(node.val + " ");
+                node = node.right;
             }
         }
     }
 
-
-    /**
-    * @Description: 非递归的后序遍历待定
-    **/
-    public void postOrderTraverse1(TreeNode root) {
+    /** 递归后续遍历
+     * @param root
+     */
+    public static void postOrderTraverseRecursive(TreeNode root) {
         if (root != null) {
-            postOrderTraverse1(root.left);
-            postOrderTraverse1(root.right);
-            System.out.print(root.val+"  ");
+            postOrderTraverseRecursive(root.left);
+            postOrderTraverseRecursive(root.right);
+            System.out.print(root.val + " ");
+        }
+    }
+
+    /** 非递归后续遍历
+     * @param root
+     */
+    public static void postOrderTraverseNonRecursive(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        TreeNode node = root;
+        while (node != null || !stack.empty()) {
+            if (node != null) {
+                stack.push(node);
+                map.put(node.val, 1);
+                node = node.left;
+            } else {
+                node = stack.peek();
+                if (map.get(node.val) == 2) {
+                    // 第二次访问，需要弹出
+                    stack.pop();
+                    System.out.print(node.val + " ");
+                    node = null;
+                } else {
+                    map.put(node.val, 2);
+                    node = node.right;
+                }
+            }
         }
     }
 
     /**
     * @Description: 层序遍历
     **/
-    public void levelTraverse(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            System.out.print(node.val+"  ");
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
-        }
-    }
-
-    /**
-    * @Description: 深度优先遍历
-    **/
-    public void depthOrderTraverse(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        stack.push(root);
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            System.out.print(node.val+"  ");
-            if (node.right != null) {
-                stack.push(node.right);
-            }
-            if (node.left != null) {
-                stack.push(node.left);
+    public static void levelTraverse(TreeNode root) {
+        if (root != null) {
+            LinkedList<TreeNode> queue = new LinkedList<>();
+            queue.offer(root);
+            while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                System.out.print(node.val + " ");
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
             }
         }
     }
 
-    public static class TreeNode {
-        private int val;
-        private TreeNode left;
-        private TreeNode right;
-    }
+
 
 
     public static void main(String[] args) {
-        // TODO: 2019/6/25
+        TreeNode node1 = new TreeNode(10);
+        TreeNode node2 = new TreeNode(6);
+        TreeNode node3 = new TreeNode(14);
+        TreeNode node4 = new TreeNode(4);
+        TreeNode node5 = new TreeNode(8);
+        TreeNode node6 = new TreeNode(12);
+        TreeNode node7 = new TreeNode(16);
+        node1.left = node2;
+        node1.right = node3;
+
+        node2.left = node4;
+        node2.right = node5;
+
+        node3.left = node6;
+        node3.right = node7;
+
+
+        System.out.println("前序 + 递归 ： ");
+        preOrderTraverseRecursive(node1);
+        System.out.println();
+
+        System.out.println("前序 + 非递归（1） ： ");
+        preOrderTraverseNonRecursive(node1);
+        System.out.println();
+
+        System.out.println("前序 + 非递归（2） ： ");
+        preOrderTraverseNonRecursive2(node1);
+        System.out.println();
+
+
+        System.out.println("============================");
+        System.out.println("中序 + 递归 ： ");
+        inOrderTraverseRecursive(node1);
+        System.out.println();
+
+        System.out.println("中序 + 非递归 ： ");
+        inOrderTraverseNonRecursive(node1);
+        System.out.println();
+
+        System.out.println("============================");
+        System.out.println("后序 + 递归 ： ");
+        postOrderTraverseRecursive(node1);
+        System.out.println();
+
+        System.out.println("后序 + 非递归 ： ");
+        postOrderTraverseNonRecursive(node1);
+        System.out.println();
+
+
+        System.out.println("============================");
+        System.out.println("层序（广度优先）： ");
+        levelTraverse(node1);
+        System.out.println();
+
+
+
+
+
+
+
+
+
+
 
     }
 
