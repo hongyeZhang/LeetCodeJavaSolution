@@ -12,71 +12,110 @@ package datastructure.linkedlist;
  **/
 public class LinkedListAlgorithm {
 
+    public static class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
     public static void main(String[] args) {
 
-//        printLinkedList(node1);
-//        printLinkedList(reverse(node1));
+//        testReverseList();
+//        testCheckCircle();
+//        testMergeSortedLists();
+//        testDeleteLastKth();
+        testFindMiddleNode();
+    }
 
 
-//        Node node1 = new Node(1);
-//        Node node2 = new Node(2);
-//        Node node3 = new Node(3);
-//        Node node4 = new Node(4);
-//        Node node5 = new Node(5);
-//        Node node6 = new Node(6);
-//        node1.next = node2;
-//        node2.next = node3;
-//        node3.next = node4;
-//        node4.next = node5;
-//        node5.next = node3;
+    public static void testReverseList() {
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        Node node5 = new Node(5);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+
+        printLinkedList(node1);
+        printLinkedList(reverseList(node1));
+    }
+
+    public static void testCheckCircle() {
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        Node node5 = new Node(5);
+        Node node6 = new Node(6);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node5.next = node6;
+        node6.next = node3;
 //        System.out.println(checkCircle(node1));
+        Node circleEntrance = getCircleEntrance(node1);
+        System.out.println(circleEntrance.data);
 
-//        Node node1 = new Node(1);
-//        Node node2 = new Node(2);
-//        Node node3 = new Node(3);
-//        node1.next = node2;
-//        node2.next = node3;
-//        Node node4 = new Node(1);
-//        Node node5 = new Node(3);
-//        Node node6 = new Node(4);
-//        node4.next = node5;
-//        node5.next = node6;
-//        printLinkedList(mergeSortedLists(node1, node4));
+    }
 
-//        Node node1 = new Node(1);
-//        Node node2 = new Node(2);
-//        Node node3 = new Node(3);
-//        Node node4 = new Node(4);
-//        Node node5 = new Node(5);
-//        Node node6 = new Node(6);
-//        node1.next = node2;
-//        node2.next = node3;
-//        node3.next = node4;
-//        node4.next = node5;
-//        node5.next = node6;
-//        printLinkedList(node1);
-//        printLinkedList(deleteLastKth(node1,3));
+    public static void testMergeSortedLists() {
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        node1.next = node2;
+        node2.next = node3;
 
+        Node node4 = new Node(1);
+        Node node5 = new Node(3);
+        Node node6 = new Node(4);
+        node4.next = node5;
+        node5.next = node6;
+        printLinkedList(mergeSortedLists(node1, node4));
+    }
 
-//        Node node1 = new Node(1);
-////        Node node2 = new Node(2);
-////        Node node3 = new Node(3);
-////        Node node4 = new Node(4);
-////        Node node5 = new Node(5);
-////        Node node6 = new Node(6);
-////        node1.next = node2;
-////        node2.next = node3;
-////        node3.next = node4;
-////        node4.next = node5;
-////        printLinkedList(node1);
-////        printLinkedList(findMiddleNode(node1));
+    public static void testDeleteLastKth() {
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        Node node5 = new Node(5);
+        Node node6 = new Node(6);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        node5.next = node6;
 
+        printLinkedList(node1);
+        printLinkedList(deleteLastKth(node1,3));
+    }
+
+    public static void testFindMiddleNode() {
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        Node node5 = new Node(5);
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = node5;
+        printLinkedList(node1);
+        Node middleNode = findMiddleNode(node1);
+        System.out.println(middleNode.data);
     }
 
     /**
      * 单链表反转
     **/
-    public static Node reverse(Node head) {
+    public static Node reverseList(Node head) {
         Node post = null;
         Node current = head;
         while (current.next != null) {
@@ -93,12 +132,12 @@ public class LinkedListAlgorithm {
      * 检测环  快慢指针方法
      **/
     public static boolean checkCircle(Node head) {
-        Node slow = head;
-        Node fast = head.next;
-        if (head == null) {
+        if (null == head) {
             return false;
         }
-        while (fast != null && fast.next.next != null) {
+
+        Node slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
             fast = fast.next.next;
             slow = slow.next;
             if (fast == slow) {
@@ -106,6 +145,48 @@ public class LinkedListAlgorithm {
             }
         }
         return false;
+    }
+
+    /** 找到环的入口
+     * （1）判断是否有环
+     * （2）判断环的长度
+     * （3）找到环的入口
+     * @param head
+     * @return
+     */
+    public static Node getCircleEntrance(Node head) {
+        if (null == head) {
+            return head;
+        }
+        int circleLen = 1;
+        Node fast = head, slow = head;
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                // step 2
+                slow = slow.next;
+                while (slow != fast) {
+                    slow = slow.next;
+                    circleLen++;
+                }
+                break;
+            }
+        }
+        System.out.println("the length of circle is : " + circleLen);
+        // step 3
+        slow = head;
+        fast = head;
+        int i = 0;
+        while (fast.next != null && i < circleLen) {
+            fast = fast.next;
+            ++i;
+        }
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 
     /**
@@ -201,47 +282,46 @@ public class LinkedListAlgorithm {
         return slow;
     }
 
-    public static void printLinkedList(Node head) {
+    /**
+     * 删除列表结点
+     * @param head
+     * @param val
+     * @return
+     */
+    public static Node deleteNode(Node head, int val) {
         Node current = head;
+        Node pre = null;
+
+        // 头结点
+        if (head.data == val) {
+            return head.next;
+        }
+
+        // 非头结点
+        pre = current;
+        current = current.next;
         while (current != null) {
-            if (current.next != null) {
-                System.out.print(current.data + "->");
-            } else {
-                System.out.print(current.data);
+            if (current.data == val) {
+                pre.next = current.next;
+                break;
             }
+            pre = current;
             current = current.next;
         }
-        System.out.println();
+
+        return head;
     }
 
-    public static class Node {
-        private int data;
-        private Node next;
-
-        public Node(int data) {
-            this.data = data;
+    /** 输出
+     * @param head
+     */
+    public static void printLinkedList(Node head) {
+        Node current = head;
+        while (current.next != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
         }
-
-        public Node(int data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
-
-        public int getData() {
-            return data;
-        }
-
-        public void setData(int data) {
-            this.data = data;
-        }
-
-        public Node getNext() {
-            return next;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
+        System.out.println(current.data);
     }
 
 }
