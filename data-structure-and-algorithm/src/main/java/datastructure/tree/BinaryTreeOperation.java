@@ -2,11 +2,12 @@ package datastructure.tree;
 
 /**
  * @program: data-structure-and-algorithm
- * @description: 获取后继节点和前驱节点
+ * @description: 对于中序遍历： 获取后继节点和前驱节点
  * @author: ZHQ
  * @create: 2019-06-23 10:18
  **/
 public class BinaryTreeOperation {
+
     private static class Node {
         private Integer value;
         private Node left;
