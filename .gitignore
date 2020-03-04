@@ -1,6 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gitignore
 .idea/
+.iml
 data-structure-and-algorithm/src/main/resources/
 data-structure-and-algorithm/src/test/
 leet-code-java/.idea/
