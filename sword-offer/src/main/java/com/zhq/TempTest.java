@@ -1,8 +1,6 @@
 package com.zhq;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.LinkedHashMap;
 
 /**
  * @author : ZHQ
@@ -10,20 +8,20 @@ import java.util.Stack;
  */
 public class TempTest {
     public static void main(String[] args) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        map.put("a", "1");
+        map.put("b", "2");
+        map.put("C", "3");
 
-        List<Integer> list = new ArrayList<>(stack);
-
-        for (Integer integer : list) {
-            System.out.print(integer + "\t");
-
+        for (String s : map.keySet()) {
+            System.out.println(s);
         }
 
 
 
 
     }
+
+
+
 }

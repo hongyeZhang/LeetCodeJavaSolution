@@ -1,5 +1,7 @@
 package algorithm;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -11,10 +13,10 @@ import java.util.Scanner;
 public class TempTest {
 
     public static void main(String[] args) {
-        String str = "hello";
-        char[] strArr = str.toCharArray();
-        System.out.println(str.length());
-        System.out.println(strArr.length);
+        int[] ints = new int[] {1, 2, 3};
+        List<Integer> ints1 = Arrays.asList(1, 2, 3);
+
+
 
 
     }
