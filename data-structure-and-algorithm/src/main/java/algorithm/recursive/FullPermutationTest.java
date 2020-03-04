@@ -12,28 +12,26 @@ public class FullPermutationTest {
         perm(input, 0, input.length - 1);
     }
 
-    static void perm(int[] list, int k, int m) {
-        // TODO: 2019/7/7
+    public static void perm(int[] list, int k, int m) {
         if (k == m) {
             for (int i = 0; i < list.length; i++) {
                 System.out.print(list[i] + " ");
             }
             System.out.println();
         } else {
-            // 进行排列
             for (int i = k; i <= m; i++) {
-                //进行交换  从而完成全排列
-                int c = list[i];
-                list[i] = list[k];
-                list[k] = c;
-                System.out.println(" k = " + k + " i = " + i);
+                swap(list, i, k);
                 perm(list, k + 1, m);
-                //需要交换回来 不然就会乱了顺序
-                c = list[i];
-                list[i] = list[k];
-                list[k] = c;
+                swap(list, i, k);
             }
         }
     }
+
+    public static void swap(int[] list, int i, int j) {
+        int tmp = list[i];
+        list[i] = list[j];
+        list[j] = tmp;
+    }
+
 
 }
