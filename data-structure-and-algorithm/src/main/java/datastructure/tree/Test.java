@@ -72,7 +72,6 @@ public class Test {
             System.out.println(s);
         }
 
-        allPaths(node3);
 
 
 

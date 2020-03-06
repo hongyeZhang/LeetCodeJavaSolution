@@ -1,19 +1,33 @@
 package com.zhq;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author : ZHQ
  * @date : 2020/3/1
  */
 public class TempTest {
     public static void main(String[] args) {
+        List<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
 
+        System.out.println(list.size());
 
-        int[] nums = new int[] {1, 1, 2, 3, 2, 3, 4};
-        int ret = nums[0];
-        for (int i = 1; i < nums.length; ++i) {
-            ret ^= nums[i];
+        while (list.size() > 1) {
+            list.remove(list.size() - 1);
         }
-        System.out.println(ret);
+
+        System.out.println(list.size());
+        System.out.println(list.get(0));
+
+
+
+
 
 
 
