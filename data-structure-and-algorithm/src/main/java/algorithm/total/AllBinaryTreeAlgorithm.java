@@ -636,21 +636,469 @@ public class AllBinaryTreeAlgorithm {
 
 
 
+    /** 判断两棵二叉树是否结构相同
+     * =============================================================================================
+     * 递归解法：
+     * （1）如果两棵二叉树都为空，返回真
+     * （2）如果两棵二叉树一棵为空，另一棵不为空，返回假
+     * （3）如果两棵二叉树都不为空，如果对应的左子树和右子树都同构返回真，其他返回假
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (null == p && null == q) {
+            return true;
+        }
+        if (null == p || null == q) {
+            return false;
+        }
+        if (p.val == q.val) {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        }
+
+        return false;
+    }
+
+
+    /** 判断二叉树是否平衡（AVL树）
+     * @param root
+     * @return
+     */
+    public boolean isBalancedAVL(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        return Math.abs(maxHigh(root.left) - maxHigh(root.right)) <= 1 && isBalancedAVL(root.left)
+                        && isBalancedAVL(root.right);
+    }
+
+    public int maxHigh(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(maxHigh(root.left), maxHigh(root.right)) + 1;
+    }
+
+
+    /** 求二叉树的镜像
+     * =============================================================================================
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (null == root) {
+            return null;
+        }
+        TreeNode leftNode = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(leftNode);
+        return root;
+    }
 
 
 
+    /** 判断二叉树是否镜像对称
+     * @param root
+     * @return
+     */
+    public boolean isSymmetric(TreeNode root) {
+        return (null == root) || isSymmetricCore(root.left, root.right);
+    }
+
+    public boolean isSymmetricCore(TreeNode left, TreeNode right) {
+        if (null == left && null == right) {
+            return true;
+        }
+        if (null == left || null == right) {
+            return false;
+        }
+        if (left.val != right.val) {
+            return false;
+        }
+        return isSymmetricCore(left.right, right.left) && isSymmetricCore(left.left, right.right);
+    }
 
 
+    @Test
+    public void testIsSymmetric() {
+        // leetcode 测过了
+    }
 
 
+    /**
+     * 求普通二叉树中两个节点的最低公共祖先节点
+     * =============================================================================================
+     * （1）如果两个节点分别在根节点的左子树和右子树，则返回根节点
+     * （2）如果两个节点都在左子树，则递归处理左子树；如果两个节点都在右子树，则递归处理右子树
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (null == root || p == root || q == root) {
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (null != left && null != right) {
+            return root;
+        }
+
+        return null == left ? right : left;
+    }
+
+    @Test
+    public void testLowestCommonAncestor() {
+        TreeNode node7 = new TreeNode(7, null, null);
+        TreeNode node4 = new TreeNode(4, null, null);
+        TreeNode node6 = new TreeNode(6, null, null);
+        TreeNode node2 = new TreeNode(2, node7, node4);
+        TreeNode node0 = new TreeNode(0, null, null);
+        TreeNode node8 = new TreeNode(8, null, null);
+        TreeNode node5 = new TreeNode(5, node6, node2);
+        TreeNode node1 = new TreeNode(1, node0, node8);
+        TreeNode node3 = new TreeNode(3, node5, node1);
+
+//        TreeNode node = lowestCommonAncestor(node3, node5, node1);
+        TreeNode node = lowestCommonAncestor(node3, node2, node8);
+    }
 
 
+    /** 求二叉搜索树的最低公共祖先：（性质：左子树 < 根节点 < 右子树）
+     * =============================================================================================
+     * @param root
+     * @param p
+     * @param q
+     * @return
+     */
+    public TreeNode binarySearchTreeLowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root.val > p.val && root.val > q.val) {
+            return binarySearchTreeLowestCommonAncestor(root.left, p, q);
+        } else if (root.val < p.val && root.val < q.val) {
+            return binarySearchTreeLowestCommonAncestor(root.right, p, q);
+        } else {
+            return root;
+        }
+    }
+
+    @Test
+    public void testBinarySearchTreeLowestCommonAncestor() {
+        // leetcode 235
+    }
+
+    /**
+     * 求二叉树的直径
+     * =============================================================================================
+     * @param root
+     * @return
+     */
+    private int path = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        diamHelper(root);
+        return path;
+    }
+
+    private int diamHelper(TreeNode root){
+        if (null == root) {
+            return 0;
+        }
+        int left = diamHelper(root.left);
+        int right = diamHelper(root.right);
+        path = Math.max(path, left + right);
+        return Math.max(left, right) + 1;
+    }
 
 
+    /** 由前序遍历序列和中序遍历序列重建二叉树
+     * =============================================================================================
+     * @param preorder
+     * @param inorder
+     * @return
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder.length == 0 || inorder.length == 0) {
+            return null;
+        }
+        return buildHelper(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1);
+    }
+
+    public TreeNode buildHelper(int[] preorder, int preStartIndex, int preEndIndex, int[] inorder,
+                    int inStartIndex, int inEndIndex) {
+        if (preStartIndex > preEndIndex || inStartIndex > inEndIndex) {
+            return null;
+        }
+
+        TreeNode root = new TreeNode(preorder[preStartIndex]);
+        for (int i = inStartIndex; i <= inEndIndex; ++i) {
+            if (inorder[i] == preorder[preStartIndex]) {
+                //在中序遍历中找到根节点
+                root.left = buildHelper(preorder, preStartIndex + 1,
+                                preStartIndex + i - inStartIndex, inorder, inStartIndex, i - 1);
+                root.right = buildHelper(preorder, preStartIndex + i - inStartIndex + 1,
+                                preEndIndex, inorder, i + 1, inEndIndex);
+            }
+        }
+        return root;
+    }
+
+    @Test
+    public void testBuildTree() {
+        // leetcode 105
+    }
+
+    /** 从中序和后序遍历中重建二叉树，与上一个方法套路一样，此处直接复制
+     * =============================================================================================
+     * 提示：根据前序和后序遍历无法构造出唯一的二叉树
+     * @param inorder
+     * @param postorder
+     * @return
+     */
+    public TreeNode buildTree2(int[] inorder, int[] postorder) {
+        if (inorder.length == 0 || postorder.length == 0) {
+            return null;
+        }
+        return buildTreeHelper2(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+    }
+
+    public TreeNode buildTreeHelper2(int[] inorder, int in_start, int in_end, int[] postorder,
+                    int post_start, int post_end) {
+        if (in_start > in_end || post_start > post_end) {
+            return null;
+        }
+        TreeNode root = new TreeNode(postorder[post_end]);
+        for (int i = in_start; i <= in_end; i++) {
+            if (inorder[i] == postorder[post_end]) {
+                root.left = buildTreeHelper2(inorder, in_start, i - 1, postorder, post_start,
+                                post_start + i - in_start - 1);
+                root.right = buildTreeHelper2(inorder, i + 1, in_end, postorder,
+                                post_start + i - in_start, post_end - 1);
+            }
+        }
+        return root;
+    }
+
+    /** 判断二叉树是不是完全二叉树
+     * =============================================================================================
+     * 完全二叉树是指最后一层左边是满的，右边可能慢也不能不满，然后其余层都是满的，根据这个特性，利用层遍历。
+     * 如果我们当前遍历到了NULL结点，如果后续还有非NULL结点，说明是非完全二叉树。
+     * @param root
+     * @return
+     */
+    public boolean checkCompleteTree(TreeNode root) {
+        if (null == root) {
+            return true;
+        }
+        // 此处如果用 ArrayQueue 则不允许入队null 节点
+        Queue<TreeNode> queue = new LinkedList<>();
+        boolean flag = false;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (null != node) {
+                if (flag == true) {
+                    return false;
+                }
+                queue.add(node.left);
+                queue.add(node.right);
+            } else {
+                flag = true;
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void testCheckCompleteTree() {
+        TreeNode node7 = new TreeNode(7, null, null);
+        TreeNode node8 = new TreeNode(8, null, null);
+        TreeNode node9 = new TreeNode(9, null, null);
+        TreeNode node4 = new TreeNode(4, node7, node8);
+        TreeNode node5 = new TreeNode(5, null, node9);
+        TreeNode node1 = new TreeNode(1, node4, node5);
+
+        Assert.assertEquals(false, checkCompleteTree(node1));
+    }
 
 
+    /** 树的子结构 B是否是A的子树
+     * @param A
+     * @param B
+     * @return
+     */
+    public boolean isSubStructure(TreeNode A, TreeNode B) {
+        if (B == null) {
+            return false;
+        }
+        return searchRoot(A, B);
+    }
+
+    // 首先找到尽所有可能开始的根节点,然后从该根节点开始找是不是子树，如果是直接结束，不是就看A的子数其他的节点
+    public static boolean searchRoot(TreeNode a, TreeNode b){
+        if (a != null && b == null) {
+            return true;
+        } else if (a == null && b == null) {
+            return true;
+        } else if (a == null && b != null) {
+            return false;
+        } else {
+            if (b.val == a.val) {
+                if (isSub(a, b)) {
+                    return true;
+                }
+            }
+            return searchRoot(a.left, b) || searchRoot(a.right, b);
+        }
+    }
+
+    // 判断当前根节点开始，左右子树是否相等
+    public static boolean isSub(TreeNode a, TreeNode b){
+        if (a == null && b == null) {
+            return true;
+        } else if (a != null && b == null) {
+            return true;
+        } else if (a == null && b != null) {
+            return false;
+        } else {
+            return a.val == b.val && (isSub(a.left, b.left) && isSub(a.right, b.right));
+        }
+    }
+
+    @Test
+    public void testIsSubStructure() {
+        // 剑指offer  面试题26
+    }
+
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (null == root) {
+            return new ArrayList<>(0);
+        }
+
+        List<List<Integer>> retList = new ArrayList<>();
+        Stack<Integer> path = new Stack<>();
+
+        findPath(root, sum, 0, retList, path);
+        return retList;
+
+    }
+
+    /**二叉树中和为某一值的路径
+     * =============================================================================================
+     * 通过一个栈来维护路径上经过的节点，回到上一层时，需要将本层的节点弹出
+     * @param node
+     * @param expectedSum
+     * @param currentSum
+     * @param retList
+     * @param path
+     */
+    public static void findPath(TreeNode node, int expectedSum, int currentSum,
+                    List<List<Integer>> retList, Stack<Integer> path) {
+        if (null == node) {
+            return;
+        }
+
+        currentSum += node.val;
+        path.push(node.val);
+
+        if (currentSum == expectedSum && isLeafNode(node)) {
+            retList.add(new ArrayList<>(path));
+            path.pop();
+            return;
+        } else if (isLeafNode(node)) {
+            path.pop();
+            return;
+        }
+
+        findPath(node.left, expectedSum, currentSum, retList, path);
+        findPath(node.right, expectedSum, currentSum, retList, path);
+        path.pop();
+    }
+
+    public static boolean isLeafNode(TreeNode node) {
+        return (null == node.left) && (null == node.right);
+    }
+
+    /**
+     * 二叉树的序列化与反序列化
+     */
+    public static class Codec {
+
+        // Encodes a tree to a single string.
+        public String serialize(TreeNode root) {
+            if (root == null) {
+                return "#,";
+            }
+            StringBuffer res = new StringBuffer(root.val + ",");
+            res.append(serialize(root.left));
+            res.append(serialize(root.right));
+            return res.toString();
+        }
+
+        // Decodes your encoded data to tree.
+        public TreeNode deserialize(String data) {
+            String[] d = data.split(",");
+            Queue<String> queue = new LinkedList<>();
+            for (int i = 0; i < d.length; i++) {
+                queue.offer(d[i]);
+            }
+            return pre(queue);
+        }
+
+        public TreeNode pre(Queue<String> queue) {
+            String val = queue.poll();
+            if (val.equals("#")) {
+                return null;
+            }
+            TreeNode node = new TreeNode(Integer.parseInt(val));
+            node.left = pre(queue);
+            node.right = pre(queue);
+            return node;
+        }
+    }
+
+    /** 二叉搜索树的第k个结点
+     * =============================================================================================
+     * 二叉搜索树按照中序遍历的顺序打印出来就是排好序的，按照中序遍历找到第 k 个结点就是所求的节点
+     * @param root
+     * @param k
+     * @return
+     */
+    public int kthSmallest(TreeNode root, int k) {
+        if (null == root) {
+            return Integer.MIN_VALUE;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+        int count = 0;
+        while (!stack.isEmpty() || null != current) {
+            if (null != current) {
+                stack.push(current);
+                current = current.left;
+            } else {
+                TreeNode node = stack.pop();
+                count++;
+                if (count == k) {
+                    return node.val;
+                }
+                node = node.right;
+            }
+        }
+        return Integer.MIN_VALUE;
+    }
+
+    @Test
+    public void testKthSmallest() {
+        TreeNode node1 = new TreeNode(1, null, null);
+        TreeNode node2 = new TreeNode(2, node1, null);
+        TreeNode node4 = new TreeNode(4, null, null);
+        TreeNode node3 = new TreeNode(3, node2, node4);
+        TreeNode node6 = new TreeNode(6, null, null);
+        TreeNode node5 = new TreeNode(5, node3, node6);
+
+        Assert.assertEquals(3, kthSmallest(node5, 3));
 
 
-
+    }
 
 }
