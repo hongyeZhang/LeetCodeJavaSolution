@@ -2,8 +2,6 @@ package algorithm.total;
 
 import org.junit.Test;
 
-import javax.swing.*;
-
 /**
  * @author : ZHQ
  * @date : 2020/3/7

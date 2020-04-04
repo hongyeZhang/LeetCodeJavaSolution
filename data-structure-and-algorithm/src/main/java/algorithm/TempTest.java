@@ -1,9 +1,5 @@
 package algorithm;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-
 /**
  * @program: data-structure-and-algorithm
  * @description:
@@ -13,8 +9,14 @@ import java.util.Scanner;
 public class TempTest {
 
     public static void main(String[] args) {
-        int[] ints = new int[] {1, 2, 3};
-        List<Integer> ints1 = Arrays.asList(1, 2, 3);
+        boolean[] test = new boolean[3];
+        for (boolean b : test) {
+            System.out.println(b);
+        }
+
+
+
+
 
 
 

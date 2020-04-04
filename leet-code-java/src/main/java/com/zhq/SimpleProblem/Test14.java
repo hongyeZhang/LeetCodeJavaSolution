@@ -1,5 +1,7 @@
 package com.zhq.SimpleProblem;
 
+import java.util.Arrays;
+
 /**
  * @author : ZHQ
  * @date : 2020/1/30
@@ -42,6 +44,31 @@ public class Test14 {
             return commonSubStr;
         }
         return "";
+    }
+
+    /** 先排序，再取排序第一位和最后一位的公共子串
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix2(String[] strs) {
+        if (null == strs || strs.length == 0) {
+            return "";
+        }
+        int len = strs.length;
+        Arrays.sort(strs);
+        String firstStr = strs[0];
+        String lastStr = strs[len - 1];
+        StringBuilder common = new StringBuilder("");
+        int i = 0, j = 0;
+        while (i < firstStr.length() && j < lastStr.length() && firstStr.charAt(i) == lastStr
+                        .charAt(j)) {
+            common.append(firstStr.charAt(i));
+            i++;
+            j++;
+        }
+
+        return common.toString();
+
     }
 
 }
