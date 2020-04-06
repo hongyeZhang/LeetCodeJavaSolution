@@ -7,6 +7,7 @@ package algorithm.dynamicplanning;
  * @create: 2019-07-28 20:47
  **/
 public class MaxCommonSubString {
+
     public static void main(String[] args) {
         String str1 = "abc123edf";
         String str2 = "bc123jg";

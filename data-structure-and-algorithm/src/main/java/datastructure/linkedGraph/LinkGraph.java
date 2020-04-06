@@ -40,7 +40,7 @@ public class LinkGraph {
             node1.index = p2;
             node1.weight = edge[i].weight;
             linkedLast(p1, node1);
-            //2.因为是无向图，所以还需要把p1连接在以p2为头的链表中
+            //2.因为是无向图，所以还需要把p1连接在以 p2 为头的链表中
             Node node2 = new Node();
             node2.index = p1;
             node2.weight = edge[i].weight;

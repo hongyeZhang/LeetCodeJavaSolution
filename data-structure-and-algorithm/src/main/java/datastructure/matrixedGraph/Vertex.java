@@ -7,8 +7,15 @@ package datastructure.matrixedGraph;
  * @create: 2019-08-07
  **/
 class Vertex {
-    public char value;   // 顶点值
-    public boolean visited; // 顶点是否被访问过
+    /**
+     *  顶点值
+     */
+    public char value;
+
+    /**
+     * 顶点是否被访问过
+     */
+    public boolean visited;
 
     public Vertex(char v) {
         value = v;

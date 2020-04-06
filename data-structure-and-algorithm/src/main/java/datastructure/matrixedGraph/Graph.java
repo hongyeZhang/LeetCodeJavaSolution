@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
+ * 有权无向图
  * @program: data-structure-and-algorithm
  * @description:
  * @author: ZHQ
  * @create: 2019-08-07
  **/
-//有权无向图
 public class Graph {
     private Vertex[] vertexList;  //存放顶点
     private int[][] mGraph;       //用矩阵表示边
@@ -157,7 +157,8 @@ public class Graph {
         //每次取最小值，其实可以用最小堆来实现，这里就直接比较了
         //进行n次循环
         for (int i = 0; i < vertexList.length; i++) {
-            int k = 0;  //记录最小路径的顶点序号
+            //记录最小路径的顶点序号
+            int k = 0;
             int min = Integer.MAX_VALUE;
             //从未被访问过的顶点中找一个距离最小的顶点
             for (int j = 0; j < vertexList.length; j++) {
@@ -468,6 +469,7 @@ public class Graph {
         g.DFS();
         System.out.println();
         System.out.println();
+
         //广度优先搜索
         System.out.println("广度优先：");
         g.BFS();

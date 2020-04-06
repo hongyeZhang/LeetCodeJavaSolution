@@ -25,8 +25,6 @@ public class MaxCommonSubSequence {
         int[][] matrix = new int[len1][len2];
 
         calculateMatrix(matrix);
-
-        // 输出表的存储结果
         System.out.println("最大公共子序列的长度为 ： " + matrix[len1 - 1][len2 - 1]);
         for (int i = 0; i < len1; ++i) {
             for (int j = 0; j < len2; ++j) {
@@ -34,6 +32,8 @@ public class MaxCommonSubSequence {
             }
             System.out.println();
         }
+
+
 
         // 输出所有的最长子序列（可能有多个）
         traceBack(len1 - 1, len2 - 1, matrix, "");
