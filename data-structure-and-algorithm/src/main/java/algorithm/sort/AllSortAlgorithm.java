@@ -42,12 +42,10 @@ public class AllSortAlgorithm {
                 break;
             }
         }
-
-
     }
 
-
     /** 快速排序
+     * 不稳定
      * @param inputs
      * @param left
      * @param right
@@ -78,8 +76,8 @@ public class AllSortAlgorithm {
         return left;
     }
 
-
     /** 归并排序
+     * 稳定
      * @param inputs
      * @param left
      * @param right

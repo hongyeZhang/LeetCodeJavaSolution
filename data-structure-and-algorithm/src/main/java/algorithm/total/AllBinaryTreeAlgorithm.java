@@ -160,6 +160,18 @@ public class AllBinaryTreeAlgorithm {
         }
     }
 
+    @Test
+    public void testAllPaths() {
+        TreeNode node1 = new TreeNode(1, null, null);
+        TreeNode node3 = new TreeNode(3, null, null);
+        TreeNode node6 = new TreeNode(6, null, null);
+        TreeNode node2 = new TreeNode(2, node1, node3);
+        TreeNode node5 = new TreeNode(5, null, node6);
+        TreeNode node4 = new TreeNode(4, node2, node5);
+
+        allPaths(node4);
+    }
+
 
     /** 判断是否为AVL树， 是否平衡
      * =============================================================================================
@@ -790,14 +802,17 @@ public class AllBinaryTreeAlgorithm {
 
     /**
      * 求二叉树的直径
+     *
+     * https://juejin.im/post/5e689b36e51d4526d120b2e3
+     *
      * =============================================================================================
      * @param root
      * @return
      */
-    private int path = 0;
+    private int path = 1;
     public int diameterOfBinaryTree(TreeNode root) {
         diamHelper(root);
-        return path;
+        return path - 1;
     }
 
     private int diamHelper(TreeNode root){
@@ -806,8 +821,13 @@ public class AllBinaryTreeAlgorithm {
         }
         int left = diamHelper(root.left);
         int right = diamHelper(root.right);
-        path = Math.max(path, left + right);
+        path = Math.max(path, left + right + 1);
         return Math.max(left, right) + 1;
+    }
+
+    @Test
+    public void testDiameterOfBinaryTree() {
+        // leetcode No.543
     }
 
 

@@ -139,11 +139,16 @@ public class AllListAlgorithm {
         if (head.next == null) {
             return head;
         }
+
         int i = 1;
-        ListNode reversedNewHead = null;// 反转部分链表反转后的头结点
-        ListNode reversedTail = null;// 反转部分链表反转后的尾结点
-        ListNode oldHead = head;// 原链表的头结点
-        ListNode reversePreNode = null;// 反转部分链表反转前其头结点的前一个结点
+        // 反转部分链表反转后的头结点
+        ListNode reversedNewHead = null;
+        // 反转部分链表反转后的尾结点
+        ListNode reversedTail = null;
+        // 原链表的头结点
+        ListNode oldHead = head;
+        // 反转部分链表反转前其头结点的前一个结点
+        ListNode reversePreNode = null;
         ListNode reverseNextNode = null;
         while (head != null) {
             if (i > n) {
@@ -165,6 +170,7 @@ public class AllListAlgorithm {
             }
             i++;
         }
+
         reversedTail.next = reverseNextNode;
         if (reversePreNode != null) {
             reversePreNode.next = reversedNewHead;
@@ -172,6 +178,19 @@ public class AllListAlgorithm {
         } else {
             return reversedNewHead;
         }
+    }
+
+    @Test
+    public void testReverseListBetween() {
+        ListNode node7 = new ListNode(7, null);
+        ListNode node6 = new ListNode(6, node7);
+        ListNode node5 = new ListNode(5, node6);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode node1 = new ListNode(1, node2);
+        printList(node1);
+        printList(reverseBetween(node1, 2, 4));
     }
 
 
@@ -426,8 +445,8 @@ public class AllListAlgorithm {
         ListNode node5 = new ListNode(5, node9);
         ListNode node1 = new ListNode(1, node5);
         printList(node1);
-//        printList(sortListQuickSort(node1));
-        printList(sortListMergeSort(node1));
+        printList(sortListQuickSort(node1));
+//        printList(sortListMergeSort(node1));
     }
 
     /** 9 单链表归并排序
