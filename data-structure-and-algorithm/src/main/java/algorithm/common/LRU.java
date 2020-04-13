@@ -25,7 +25,7 @@ import java.util.HashMap;
  *
  *
  * 缓存淘汰算法：
- * 常见类型包括LFU、LRU、ARC、FIFO、MRU。
+ * 常见类型包括 LFU、LRU、ARC、FIFO、MRU。
  *
  * （1）最不经常使用算法（LFU）：
  * 这个缓存算法使用一个计数器来记录条目被访问的频率。通过使用LFU缓存算法，最低访问数的条目首先被移除。这个方法并不经常使用，

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import datastructure.array.Array;
+import javafx.scene.control.TableView;
 
 /**
  * @author : ZHQ
@@ -604,6 +605,70 @@ public class AllStringAlgorithm {
         }
         return dp[s.length()][p.length()];
     }
+
+
+
+    /**
+     * 3. 无重复字符的最长子串
+     *
+     * 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) {
+            return 0;
+        } else if (s.length() == 1) {
+            return 1;
+        }
+
+        // len >= 2
+        char[] chars = s.toCharArray();
+        int len = chars.length;
+        int[] dp = new int[len];
+        dp[0] = 1;
+        if (chars[0] == chars[1]) {
+            dp[1] = 1;
+        } else {
+            dp[1] = 2;
+        }
+        int max = Math.max(dp[0], dp[1]);
+
+        if (len > 2) {
+            for (int i = 2; i < len; ++i) {
+                String prefix = getPrefix(s, i - 1, dp[i - 1]);
+                if (prefix.contains(String.valueOf(s.charAt(i)))) {
+                    dp[i] = getUniqueNum(prefix, s.charAt(i));
+                } else {
+                    dp[i] = dp[i - 1] + 1;
+                }
+                max = Math.max(dp[i], max);
+            }
+        }
+        return max;
+    }
+
+    public String getPrefix(String str, int endIndex, int length) {
+        int startIndex = endIndex + 1 - length;
+        return str.substring(startIndex, endIndex + 1);
+    }
+
+    public int getUniqueNum(String input, char c) {
+        return input.length() - input.lastIndexOf(c);
+    }
+
+    @Test
+    public void testLengthOfLongestSubstring() {
+        String input = "abcabcbb";
+        System.out.println(lengthOfLongestSubstring(input));
+
+    }
+
+
+
+
+
 
 
 

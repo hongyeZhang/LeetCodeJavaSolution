@@ -1,7 +1,5 @@
 package com.zhq;
 
-import sun.net.www.content.text.PlainTextInputStream;
-
 /**
  * @author : ZHQ
  * @date : 2020/3/1
@@ -59,12 +57,35 @@ public class Interview22 {
 
         printLinkList(node1);
         System.out.println();
-        printLinkList(getKthFromEnd(node1, 2));
+        printLinkList(getLastKNode(node1, 5));
 
     }
 
+    public static ListNode getLastKNode(ListNode head, int k) {
+        if (null == head || k <= 0) {
+            return null;
+        }
 
-
-
-
+        int i = 0;
+        ListNode current = head;
+        while (current != null && ++i <= k) {
+            current = current.next;
+        }
+        // 判断结束的终止条件
+        if (current == null && i == k) {
+            return head;
+        }
+        if (i == k + 1) {
+            if (current != null) {
+                ListNode first = current;
+                ListNode second = head;
+                while (first != null) {
+                    first = first.next;
+                    second = second.next;
+                }
+                return second;
+            }
+        }
+        return null;
+    }
 }

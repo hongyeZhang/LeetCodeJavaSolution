@@ -5,6 +5,7 @@ package com.zhq;
  * @date : 2020/3/3
  */
 public class Interview48 {
+
     public static int lengthOfLongestSubstring(String s) {
         if (s.isEmpty()) {
             return 0;

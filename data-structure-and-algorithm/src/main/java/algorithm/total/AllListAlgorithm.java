@@ -33,6 +33,32 @@ public class AllListAlgorithm {
         System.out.println(current.val);
     }
 
+    public int calculateListLength(ListNode head) {
+        if (null == head) {
+            return 0;
+        }
+        int length = 0;
+        ListNode current = head;
+        while (current != null) {
+            length++;
+            current = current.next;
+        }
+
+        return length;
+    }
+
+    @Test
+    public void test() {
+        ListNode node3 = new ListNode(3, null);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode node1 = new ListNode(1, node2);
+
+        System.out.println(calculateListLength(node1));
+    }
+
+
+
+
 
     /** 1 在O(1)的时间范围内删除链表节点
      * =============================================================================================
@@ -372,6 +398,11 @@ public class AllListAlgorithm {
             if (null != l2) {
                 l2 = l2.next;
             }
+        }
+
+        // 最后一位的进位处理
+        if (carry > 0) {
+            newHead.next = new ListNode(1);
         }
 
         return sentinelNode.next;

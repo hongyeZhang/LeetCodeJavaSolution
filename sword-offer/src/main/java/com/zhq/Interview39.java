@@ -1,7 +1,6 @@
 package com.zhq;
 
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author : ZHQ
@@ -11,7 +10,7 @@ public class Interview39 {
 
     public static int majorityElement(int[] nums) {
         Arrays.sort(nums);
-        return nums[nums.length >> 2];
+        return nums[nums.length >> 1];
     }
 
     /** 寻找第k大的数字  此时 k = length /2  时间复杂度 O(N)
@@ -64,7 +63,7 @@ public class Interview39 {
 
     public static void main(String[] args) {
         int[] nums = new int[] {1, 2, 3, 2, 2, 2, 5, 4, 2};
-//        System.out.println(majorityElement(nums));
+        System.out.println(majorityElement(nums));
         System.out.println(majorityElement2(nums));
 
 
