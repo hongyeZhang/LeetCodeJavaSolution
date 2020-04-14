@@ -168,7 +168,7 @@ public class Test15 {
         int len = nums.length;
         List<List<Integer>> res = new ArrayList<>();
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }

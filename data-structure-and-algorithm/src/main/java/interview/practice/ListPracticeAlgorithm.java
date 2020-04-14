@@ -114,13 +114,29 @@ public class ListPracticeAlgorithm {
         return current;
     }
 
+    public ListNode inverseList2(ListNode head) {
+        if (null == head || null == head.next) {
+            return head;
+        }
+        ListNode current = head;
+        ListNode pre = null;
+        while (current != null) {
+            ListNode next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+        return pre;
+    }
+
     @Test
     public void testInverseList() {
         ListNode node8 = new ListNode(8, null);
         ListNode node1 = new ListNode(1, node8);
         printSingleList(node1);
         System.out.println("after inverse");
-        printSingleList(inverseList(node1));
+//        printSingleList(inverseList(node1));
+        printSingleList(inverseList2(node1));
     }
 
 

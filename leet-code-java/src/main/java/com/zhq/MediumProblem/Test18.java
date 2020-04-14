@@ -49,8 +49,12 @@ public class Test18 {
                     if (tmp == target) {
                         List<Integer> tmpList = new LinkedList<>(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
                         res.add(tmpList);
-                        while (left < right && nums[left] == nums[left + 1]) left += 1;
-                        while (left < right && nums[right] == nums[right - 1]) right -= 1;
+                        while (left < right && nums[left] == nums[left + 1]) {
+                            left += 1;
+                        }
+                        while (left < right && nums[right] == nums[right - 1]) {
+                            right -= 1;
+                        }
                         left += 1;
                         right -= 1;
                     } else if (tmp > target) {
