@@ -763,6 +763,20 @@ public class AllBinaryTreeAlgorithm {
     }
 
     @Test
+    public void testLowestCommonAncestor2() {
+        TreeNode node3 = new TreeNode(3, null, null);
+        TreeNode node5 = new TreeNode(5, null, null);
+        TreeNode node8 = new TreeNode(8, null, null);
+        TreeNode node11 = new TreeNode(11, null, null);
+        TreeNode node4 = new TreeNode(4, node3, node5);
+        TreeNode node10 = new TreeNode(10, node8, node11);
+        TreeNode node7 = new TreeNode(7, node4, node10);
+
+        TreeNode node = lowestCommonAncestor(node7, node3, node5);
+        System.out.println(node.val);
+    }
+
+    @Test
     public void testLowestCommonAncestor() {
         TreeNode node7 = new TreeNode(7, null, null);
         TreeNode node4 = new TreeNode(4, null, null);
@@ -829,6 +843,16 @@ public class AllBinaryTreeAlgorithm {
     @Test
     public void testDiameterOfBinaryTree() {
         // leetcode No.543
+        TreeNode node3 = new TreeNode(3, null, null);
+        TreeNode node5 = new TreeNode(5, null, null);
+        TreeNode node8 = new TreeNode(8, null, null);
+        TreeNode node11 = new TreeNode(11, null, null);
+        TreeNode node4 = new TreeNode(4, node3, node5);
+        TreeNode node10 = new TreeNode(10, node8, node11);
+        TreeNode node7 = new TreeNode(7, node4, node10);
+
+        System.out.println(diameterOfBinaryTree(node7));
+
     }
 
 

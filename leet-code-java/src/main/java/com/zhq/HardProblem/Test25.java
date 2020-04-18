@@ -90,6 +90,7 @@ public class Test25 {
             pre = start;
             end = pre;
         }
+
         return dummy.next;
     }
 

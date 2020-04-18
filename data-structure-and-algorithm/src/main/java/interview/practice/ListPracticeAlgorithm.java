@@ -141,6 +141,44 @@ public class ListPracticeAlgorithm {
 
 
 
+    public void printKGroupList(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode current = dummy;
+        while (current.next != null) {
+            for (int i = 0; i < k && current != null; ++i) {
+                current = current.next;
+                System.out.print(current.val + "\t");
+            }
+            System.out.println();
+            System.out.println("over");
+            break;
+        }
+
+    }
+
+    @Test
+    public void test() {
+        ListNode node5 = new ListNode(5, null);
+        ListNode node4 = new ListNode(4, node5);
+        ListNode node3 = new ListNode(3, node4);
+        ListNode node2 = new ListNode(2, node3);
+        ListNode node1 = new ListNode(1, node2);
+
+        printKGroupList(node1, 7);
+
+
+
+
+
+
+    }
+
+
+
+
+
+
 
 
 

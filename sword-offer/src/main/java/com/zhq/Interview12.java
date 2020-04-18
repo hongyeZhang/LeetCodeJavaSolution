@@ -40,7 +40,6 @@ public class Interview12 {
         boolean hasPath = false;
         if ((row >= 0 && row < rowMax) && (col >= 0 && col < colMax) && board[row][col] == word
                         .charAt(pathLen) && !visitedFlag[row][col]) {
-
             pathLen++;
             visitedFlag[row][col] = true;
             hasPath = hasPathCore(board, row - 1, col, rowMax, colMax, pathLen, visitedFlag, word)

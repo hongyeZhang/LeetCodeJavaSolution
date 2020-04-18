@@ -2,11 +2,14 @@ package com.zhq.HardProblem;
 
 import org.junit.Test;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * @author : ZHQ
  * @date : 2020/4/15
  */
-public class Test25_2 {
+public class Test25_3 {
 
     static class ListNode {
         int val;
@@ -27,54 +30,41 @@ public class Test25_2 {
 
     /**
      *
-     * 参考题解：
-     *
-     * https://leetcode-cn.com/problems/reverse-nodes-in-k-group/solution/tu-jie-kge-yi-zu-fan-zhuan-lian-biao-by-user7208t/
-     *
-     * 画图 + 理解
+     * 通过栈来实现
      *
      * @param head
      * @param k
      * @return
      */
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode pre = dummy;
-        ListNode end = dummy;
-        while (end.next != null) {
-            for (int i = 0; i < k && end != null; ++i) {
-                end = end.next;
-            }
-            if (end == null) {
-                break;
-            }
-            ListNode start = pre.next;
-            ListNode next = end.next;
-            end.next = null;
-            pre.next = reverseList(start);
-            start.next = next;
-            pre = start;
-            end = pre;
-        }
-
-        return dummy.next;
-    }
-
-    public ListNode reverseList(ListNode head) {
         if (null == head) {
             return head;
         }
 
-        ListNode current = head;
-        ListNode pre = null;
-        while (current != null) {
-            ListNode next = current.next;
-            current.next = pre;
-            pre = current;
-            current = next;
+        Deque<ListNode> stack = new LinkedList<>();
+        ListNode dummy = new ListNode(0);
+        ListNode p = dummy;
+        while (true) {
+            int count = 0;
+            ListNode current = head;
+            while (current != null && count < k) {
+                stack.push(current);
+                current = current.next;
+                count++;
+            }
+            if (count != k) {
+                p.next = head;
+                break;
+            }
+
+            while (!stack.isEmpty()) {
+                p.next = stack.pop();
+                p = p.next;
+            }
+            p.next = current;
+            head = current;
         }
-        return pre;
+        return dummy.next;
     }
 
     @Test
@@ -98,6 +88,12 @@ public class Test25_2 {
         printNodeList(listNode);
 
     }
+
+
+
+
+
+
 
 
 }
