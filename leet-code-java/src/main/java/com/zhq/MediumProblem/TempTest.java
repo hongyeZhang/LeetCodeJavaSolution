@@ -1,7 +1,5 @@
 package com.zhq.MediumProblem;
 
-import com.zhq.util.CharUtil;
-
 /**
  * @program: LeetCodeTest
  * @description:
@@ -11,16 +9,10 @@ import com.zhq.util.CharUtil;
 public class TempTest {
 
     public static void main(String[] args) {
-        int k = 2;
-        char[] chars = new char[]{'1', '2', '3', '4', '5'};
-        CharUtil.printCharArray(chars);
+        int n = 12;
+        System.out.println((int) Math.floor(Math.pow(n, 0.5)));
 
-        int len = chars.length;
-        char[] newArray = new char[len];
-        System.arraycopy(chars, len - k, newArray, 0, k);
-        System.arraycopy(chars, 0, newArray, k, len - k);
-        System.out.println();
-        CharUtil.printCharArray(newArray);
+
 
 
 
