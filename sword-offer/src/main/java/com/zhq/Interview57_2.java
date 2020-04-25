@@ -1,7 +1,5 @@
 package com.zhq;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +57,6 @@ public class Interview57_2 {
             }
             big++;
             currentSum += big;
-
         }
 
         return retList;

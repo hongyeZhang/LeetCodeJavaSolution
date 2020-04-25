@@ -1,49 +1,36 @@
 package com.zhq;
 
-import java.util.Arrays;
+import org.junit.Test;
 
 /**
  * @author : ZHQ
- * @date : 2020/3/3
+ * @date : 2020/4/19
  */
-public class Interview39 {
+public class Interview39_2 {
 
-    public static int majorityElement(int[] nums) {
-        Arrays.sort(nums);
-        return nums[nums.length >> 1];
-    }
-
-    /** 寻找第k大的数字  此时 k = length /2  时间复杂度 O(N)
-     * @param nums
-     * @return
-     */
-    public static int majorityElement2(int[] nums) {
-        if (null == nums ) {
-            return 0;
-        } else if (nums.length == 1) {
-            return nums[0];
+    public int majorityElement(int[] nums) {
+        if (null == nums || nums.length == 0) {
+            return -1;
         }
-
-        int len = nums.length;
         int start = 0;
-        int end = len - 1;
-        int middle = len >> 1;
-
+        int end = nums.length - 1;
+        int middle = nums.length >> 1;
         int index = partition(nums, start, end);
         while (index != middle) {
-            if (index > middle) {
+            while (index > middle) {
                 end = index - 1;
                 index = partition(nums, start, end);
-            } else {
+            }
+            while (index < middle) {
                 start = index + 1;
                 index = partition(nums, start, end);
             }
         }
 
-        return nums[index];
+        return nums[middle];
     }
 
-    public static int partition(int[] nums, int left, int right) {
+    public int partition(int[] nums, int left, int right) {
         int pivot = nums[left];
         while (left < right) {
             while (left < right && nums[right] >= pivot) {
@@ -59,15 +46,19 @@ public class Interview39 {
         return left;
     }
 
-
-
-    public static void main(String[] args) {
+    @Test
+    public void test() {
 //        int[] nums = new int[] {1, 2, 3, 2, 2, 2, 5, 4, 2};
+
         int[] nums = new int[] {4, 5, 4};
         System.out.println(majorityElement(nums));
-        System.out.println(majorityElement2(nums));
-
-
-
     }
+
+
+
+
+
+
+
+
 }

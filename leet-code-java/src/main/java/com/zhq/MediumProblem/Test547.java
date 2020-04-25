@@ -22,7 +22,7 @@ public class Test547 {
             this.w = new int[count];
             for (int i = 0; i < count; ++i) {
                 id[i] = i;
-                w[i] = i;
+                w[i] = 1;
             }
         }
 

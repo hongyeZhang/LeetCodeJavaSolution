@@ -6,7 +6,8 @@ package com.zhq.HardProblem;
  */
 public class Test45 {
     public static void main(String[] args) {
-        int[] nums = {2, 3, 1, 1, 4};
+//        int[] nums = {2, 3, 1, 1, 4};
+        int[] nums = {8, 1, 1, 1, 1, 1, 4};
         System.out.println(jump(nums));
 
     }
