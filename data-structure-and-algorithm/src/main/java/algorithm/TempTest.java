@@ -9,17 +9,6 @@ package algorithm;
 public class TempTest {
 
     public static void main(String[] args) {
-        boolean[] test = new boolean[3];
-        for (boolean b : test) {
-            System.out.println(b);
-        }
-
-
-
-
-
-
-
 
     }
 

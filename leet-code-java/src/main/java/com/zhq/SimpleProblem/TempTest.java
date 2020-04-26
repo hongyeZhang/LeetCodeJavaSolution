@@ -1,5 +1,7 @@
 package com.zhq.SimpleProblem;
 
+import java.util.LinkedHashMap;
+
 /**
  * @program: LeetCodeTest
  * @description:
@@ -9,7 +11,13 @@ package com.zhq.SimpleProblem;
 public class TempTest {
 
     public static void main(String[] args) {
-        System.out.println(Integer.MAX_VALUE);
+        LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
+        map.put('a', 1);
+        map.put('b', 2);
+        map.put('a', map.get('a') + 1);
+
+        System.out.println(map);
+
 
 
 

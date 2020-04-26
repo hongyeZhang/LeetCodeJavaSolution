@@ -9,8 +9,10 @@ package com.zhq.MediumProblem;
 public class TempTest {
 
     public static void main(String[] args) {
-        int n = 12;
-        System.out.println((int) Math.floor(Math.pow(n, 0.5)));
+        int a = 7;
+        int b = 8;
+        System.out.println(Math.ceil(a / 2.0));
+        System.out.println(Math.ceil(b / 2.0));
 
 
 
