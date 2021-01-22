@@ -1,7 +1,5 @@
 package algorithm.recursive;
 
-import sun.awt.geom.AreaOp;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +31,6 @@ public class FullPermutationTest2 {
         input[i] = input[j];
         input[j] = tmp;
     }
-    
-    
-    
-
-
 
     public static void main(String[] args) {
         int[] input = {1, 3, 5};
