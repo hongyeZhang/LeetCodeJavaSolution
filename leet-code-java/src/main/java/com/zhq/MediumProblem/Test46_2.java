@@ -7,12 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @program: LeetCodeTest
- * @description:
- * @author: ZHQ
- * @create: 2019-05-19 16:27
- **/
-public class TempTest {
+ * @author ZHQ
+ * @date 2022/2/28
+ */
+public class Test46_2 {
 
 
     public List<List<Integer>> permute(int[] nums) {
@@ -46,8 +44,6 @@ public class TempTest {
         nums[q] = tmp;
     }
 
-
-
     @Test
     public void test() {
         int[] nums = new int[]{1, 2, 3};
@@ -56,10 +52,4 @@ public class TempTest {
             System.out.println(integers);
         }
     }
-
-
-
-
-
-
 }
