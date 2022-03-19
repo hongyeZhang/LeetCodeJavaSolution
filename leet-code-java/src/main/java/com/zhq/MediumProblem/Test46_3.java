@@ -30,6 +30,13 @@ public class Test46_3 {
         return retList;
     }
 
+    /**
+     * 从 0 开始遍历，由于会访问到之前已经用到的元素，因此需要 used 数组进行记录
+     * @param retList
+     * @param nums
+     * @param path
+     * @param used
+     */
     public void dfs(List<List<Integer>> retList, int[] nums, Stack<Integer> path, boolean[] used) {
         if (path.size() == nums.length) {
             retList.add(new ArrayList<>(path));

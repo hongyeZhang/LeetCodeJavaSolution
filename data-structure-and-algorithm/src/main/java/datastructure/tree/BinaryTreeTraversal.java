@@ -66,6 +66,9 @@ public class BinaryTreeTraversal {
     }
 
     /** 非递归前序2
+     * 依据前序遍历的顺序，优先訪问根结点。然后在訪问左子树和右子树。所以。对于随意结点node。
+     * 第一部分即直接訪问之，之后在推断左子树是否为空，不为空时即反复上面的步骤，直到其为空。
+     * 若为空。则须要訪问右子树。注意。在訪问过左孩子之后。须要反过来訪问其右孩子
      * @param root
      */
     public static void preOrderTraverseNonRecursive2(TreeNode root) {
@@ -117,6 +120,7 @@ public class BinaryTreeTraversal {
 
 
     /** 非递归的中序遍历
+     * 在前序遍历的基础上，仅仅只是訪问的顺序移到出栈时
      * @param root
      */
     public static void inOrderTraverseNonRecursive(TreeNode root) {
