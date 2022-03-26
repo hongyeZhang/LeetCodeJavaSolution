@@ -1,6 +1,6 @@
 package com.zhq.SimpleProblem;
 
-import java.util.LinkedHashMap;
+import org.junit.Test;
 
 /**
  * @program: LeetCodeTest
@@ -10,16 +10,12 @@ import java.util.LinkedHashMap;
  **/
 public class TempTest {
 
-    public static void main(String[] args) {
-        LinkedHashMap<Character, Integer> map = new LinkedHashMap<>();
-        map.put('a', 1);
-        map.put('b', 2);
-        map.put('a', map.get('a') + 1);
-
-        System.out.println(map);
 
 
-
+    @Test
+    public void test() {
 
     }
+
+
 }
