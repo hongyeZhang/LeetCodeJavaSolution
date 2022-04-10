@@ -10,7 +10,7 @@ import org.junit.Test;
 public class Test1143 {
 
     /**
-     * dp[i][j]的含义是：对于s1[1..i]和s2[1..j]，它们的 LCS 长度是dp[i][j]
+     * dp[i][j]的含义是：s1[0..i-1] 和 s2[0..j-1] 的 lcs 长度为 dp[i][j]
      * @param text1
      * @param text2
      * @return
