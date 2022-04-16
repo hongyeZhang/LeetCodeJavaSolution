@@ -37,11 +37,7 @@ public class Test55_2 {
     @Test
     public void test() {
         int[] nums = new int[] {2, 3, 1, 1, 4};
-
         System.out.println(canJump(nums));
-
-
-
 
     }
 

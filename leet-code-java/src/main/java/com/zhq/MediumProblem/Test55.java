@@ -1,27 +1,20 @@
 package com.zhq.MediumProblem;
 
-import java.sql.PseudoColumnUsage;
+
+import org.junit.Test;
 
 /**
  * @author : ZHQ
  * @date : 2020/2/8
  */
 public class Test55 {
-    public static void main(String[] args) {
-//        int[] nums = {2, 3, 1, 1, 4};
-//        int[] nums = {3, 2, 1, 0, 4};
-        int[] nums = {1, 1, 2, 2, 0, 1, 1};
-        System.out.println(canJump(nums));
-
-
-    }
 
     /**
      * 从目标位置向第一个位置逼近，与45题的降低难度版
      * @param nums
      * @return
      */
-    public static boolean canJump(int[] nums) {
+    public boolean canJump(int[] nums) {
         boolean canJumpFlag = false;
         int position = nums.length - 1;
         int whileIndex = 0;
@@ -43,6 +36,34 @@ public class Test55 {
         }
 
         return canJumpFlag;
+    }
+
+    /**
+     * 贪心算法
+     * @param nums
+     * @return
+     */
+    public boolean canJump2(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+        int n = nums.length;
+        // 能跳到的最远的位置
+        int farthest = 0;
+        for (int i = 0; i < n - 1; ++i) {
+            farthest = Math.max(i + nums[i], farthest);
+            if (farthest == i) {
+                // 可能是遇到了0，跳不过去了
+                return false;
+            }
+        }
+        return farthest >= n - 1;
+    }
+
+    @Test
+    public void test() {
+        int[] nums = {1, 1, 2, 2, 0, 1, 1};
+        System.out.println(canJump(nums));
     }
 
 
