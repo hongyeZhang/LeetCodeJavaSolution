@@ -33,6 +33,8 @@ public class Test72 {
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
+                    // 枚举三种状态的值
+                    // 1：插入 2：删除 3：替换
                     dp[i][j] = min3(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + 1);
                 }
             }

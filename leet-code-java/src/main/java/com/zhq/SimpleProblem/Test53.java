@@ -1,20 +1,44 @@
 package com.zhq.SimpleProblem;
 
+import org.junit.Test;
+
 /**
  * @author : ZHQ
  * @date : 2020/2/8
  */
 public class Test53 {
-    public static void main(String[] args) {
+
+
+    @Test
+    public void test() {
         int[] nums = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println(maxSubArray(nums));
-        System.out.println(maxSubArrayMethod2(nums));
-        System.out.println(maxSubArrayMethod3(nums));
-
-
+//        System.out.println(maxSubArray(nums));
+//        System.out.println(maxSubArrayMethod2(nums));
+//        System.out.println(maxSubArrayMethod3(nums));
+        System.out.println(maxSubArrayDynamicPlanning(nums));
     }
 
-
+    /**
+     * dp[i] 代表以 i 为结尾的子数组的最大和，
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArrayDynamicPlanning(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int n = nums.length;
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        int res = dp[0];
+        for (int i = 1; i < n; ++i) {
+            // 要么接到前面连续的数组上，要么自己作为开始新展开一个数组。
+            dp[i] = Math.max(nums[i], dp[i - 1] + nums[i]);
+            res = Math.max(res, dp[i]);
+        }
+        return res;
+    }
 
 
     /**

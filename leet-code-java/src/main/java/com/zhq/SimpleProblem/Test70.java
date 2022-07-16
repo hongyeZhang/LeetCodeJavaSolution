@@ -8,6 +8,11 @@ import org.junit.Test;
  */
 public class Test70 {
 
+    /**
+     * dp[i] = dp[i-1] + dp[i-2] 类似于 斐波拉契数列
+     * @param n
+     * @return
+     */
     public int climbStairs(int n) {
         if (n <= 0) {
             return 0;

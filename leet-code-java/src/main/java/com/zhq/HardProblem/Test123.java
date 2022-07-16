@@ -17,9 +17,6 @@ public class Test123 {
      * 第 i 天，最多可以交易 k 次，0为不持有，1为持有
      * dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
      * dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
-     * 此题 k = infinity，消掉 k 可得
-     * dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-     * dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])
      * @param prices
      * @return
      */

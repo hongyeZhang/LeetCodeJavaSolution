@@ -1,12 +1,14 @@
 package com.zhq.MediumProblem;
 
+import org.junit.Test;
+
 /**
  * @author : ZHQ
  * @date : 2020/2/9
  */
 public class Test64 {
 
-    public static int minPathSum(int[][] grid) {
+    public int minPathSum(int[][] grid) {
         int row = grid.length;
         int col = grid[0].length;
         int[][] dp = new int[row][col];
@@ -29,7 +31,8 @@ public class Test64 {
         return dp[row - 1][col - 1];
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         int[][] grid = {{1, 3, 1}, {1, 5, 1}, {4, 2, 1}};
         System.out.println(minPathSum(grid));
     }
