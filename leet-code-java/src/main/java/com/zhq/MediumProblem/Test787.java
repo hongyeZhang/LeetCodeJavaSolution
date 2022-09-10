@@ -1,6 +1,5 @@
 package com.zhq.MediumProblem;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -70,19 +69,24 @@ public class Test787 {
                 res = Math.min(res, subProblem + cost);
             }
         }
+        if (res == Integer.MAX_VALUE) {
+            res = NO_SOLUTION;
+        }
         memo[s][k] = res;
         return res;
     }
 
     @Test
     public void test() {
-        int n = 3;
-        int[][] edges = new int[][]{{0, 1, 100}, {1, 2, 100}, {0, 2, 500}};
+        int n = 2;
+        int[][] edges = new int[][]{{1, 0, 5}};
         int src = 0;
         int dst = 2;
         int k = 1;
-        Assert.assertEquals(200, findCheapestPrice(n, edges, src, dst, k));
-        Assert.assertEquals(500, findCheapestPrice(n, edges, 0, 2, 0));
+//        Assert.assertEquals(200, findCheapestPrice(n, edges, src, dst, k));
+//        Assert.assertEquals(500, findCheapestPrice(n, edges, 0, 1, 1));
+        System.out.println(findCheapestPrice(n, edges, 0, 1, 1));
+        System.out.println();
 
     }
 

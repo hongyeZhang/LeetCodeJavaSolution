@@ -1,6 +1,9 @@
 package com.zhq.HardProblem;
 
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Arrays;
 
 /**
  * @description:
@@ -11,9 +14,6 @@ public class Test174 {
 
     /**
      * dp[i][j] 代表从 grid[i][j] 到达右下角所需要的最少的血量
-     * todo 感觉有问题，暂且搁置！！！
-     *
-     *
      * @param dungeon
      * @return
      */
@@ -23,33 +23,37 @@ public class Test174 {
         }
         int m = dungeon.length;
         int n = dungeon[0].length;
-        int[][] dp = new int[m][n];
-
-        for (int i = m - 1; i >= 0; i--) {
-            for (int j = n - 1; j >= 0; j--) {
-                if (i == m - 1 && j == n - 1) {
-                    dp[i][j] = dungeon[i][j] > 0 ? 1 : -dungeon[i][j] + 1;
-                    continue;
-                }
-                if (i == m - 1) {
-                    dp[i][j] = dp[i][j + 1] - dungeon[i][j];
-                    continue;
-                }
-                if (j == n - 1) {
-                    dp[i][j] = dp[i + 1][j] - dungeon[i][j];
-                    continue;
-                }
-                dp[i][j] = Math.min(dp[i + 1][j], dp[i][j + 1]) - dungeon[i][j];
-            }
+        int[][] memo = new int[m][n];
+        for (int[] rows : memo) {
+            Arrays.fill(rows, -1);
         }
-        return dp[0][0];
+        return dp(dungeon, memo, 0, 0);
     }
+
+    public int dp(int[][] grid, int[][] memo, int i, int j) {
+        int m = grid.length;
+        int n = grid[0].length;
+        if (i == m - 1 && j == n - 1) {
+            return grid[i][j] > 0 ? 1 : -grid[i][j] + 1;
+        }
+        if (i == m || j == n) {
+            return Integer.MAX_VALUE;
+        }
+        if (memo[i][j] != -1) {
+            return memo[i][j];
+        }
+        int res = Math.min(dp(grid, memo, i + 1, j), dp(grid, memo, i, j + 1)) - grid[i][j];
+        res = res <= 0 ? 1 : res;
+        memo[i][j] = res;
+        return res;
+    }
+
 
     @Test
     public void test() {
-        int[][] matrix = new int[][]{{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
-        System.out.println(calculateMinimumHP(matrix));
-
+//        int[][] matrix = new int[][]{{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
+        int[][] matrix = new int[][]{{0, 0, 0}, {1, 1, -1}};
+        Assert.assertEquals(1, calculateMinimumHP(matrix));
     }
 
 }
