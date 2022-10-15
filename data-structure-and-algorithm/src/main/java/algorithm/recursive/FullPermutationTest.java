@@ -1,37 +1,76 @@
 package algorithm.recursive;
 
-/**
- * @program: data-structure-and-algorithm
- * @description: 实现集合的全排列
- * @author: ZHQ
- * @create: 2019-07-07 20:11
- **/
-public class FullPermutationTest {
-    public static void main(String[] args) {
-        int[] input = {1, 3, 5};
-        perm(input, 0, input.length - 1);
-    }
+import org.junit.Test;
 
-    public static void perm(int[] list, int k, int m) {
-        if (k == m) {
-            for (int i = 0; i < list.length; i++) {
-                System.out.print(list[i] + " ");
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author : ZHQ
+ * @date : 2020/3/3
+ */
+public class FullPermutationTest {
+
+    @Test
+    public void testFullPermutation() {
+        int[] input = {1, 3, 5};
+        List<List<Integer>> retList = new ArrayList<>();
+        fullPermutation(input, 0, retList);
+
+        for (List<Integer> list : retList) {
+            for (Integer integer : list) {
+                System.out.print(integer + "\t");
             }
             System.out.println();
+        }
+    }
+
+
+    @Test
+    public void test2() {
+
+        int[] input = {1, 3, 5};
+        List<List<Integer>> retList = new ArrayList<>();
+        boolean[] chooseFlag = new boolean[input.length];
+        fullPermutationSecond(input, 0, chooseFlag, retList);
+
+        for (List<Integer> list : retList) {
+            for (Integer integer : list) {
+                System.out.print(integer + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void fullPermutationSecond(int[] input, int index, boolean[] chooseFlag, List<List<Integer>> retList) {
+        if (index == input.length) {
+
+        }
+    }
+
+
+
+    public static void fullPermutation(int[] input, int index, List<List<Integer>> retList) {
+        if (index == input.length - 1) {
+            List<Integer> tmpList = new ArrayList<>();
+            for (int i : input) {
+                tmpList.add(i);
+            }
+            retList.add(tmpList);
         } else {
-            for (int i = k; i <= m; i++) {
-                swap(list, i, k);
-                perm(list, k + 1, m);
-                swap(list, i, k);
+            for (int i = index; i < input.length; ++i) {
+                swap(input, index, i);
+                fullPermutation(input, index + 1, retList);
+                swap(input, index, i);
             }
         }
     }
 
-    public static void swap(int[] list, int i, int j) {
-        int tmp = list[i];
-        list[i] = list[j];
-        list[j] = tmp;
+    public static void swap(int[] input, int i, int j) {
+        int tmp = input[i];
+        input[i] = input[j];
+        input[j] = tmp;
     }
 
-
+    
 }

@@ -1,5 +1,6 @@
 package com.zhq.MediumProblem;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -61,6 +62,9 @@ public class Test787 {
 
         int res = Integer.MAX_VALUE;
         List<int[]> nodes = indegree.get(s);
+        if (nodes == null || nodes.isEmpty()) {
+            return NO_SOLUTION;
+        }
         for (int[] node : nodes) {
             int from = node[0];
             int cost = node[1];
@@ -78,16 +82,26 @@ public class Test787 {
 
     @Test
     public void test() {
-        int n = 2;
-        int[][] edges = new int[][]{{1, 0, 5}};
+        int n = 3;
+        int[][] edges = new int[][]{{0,1,100},{1,2,100},{0,2,500}};
         int src = 0;
         int dst = 2;
         int k = 1;
-//        Assert.assertEquals(200, findCheapestPrice(n, edges, src, dst, k));
-//        Assert.assertEquals(500, findCheapestPrice(n, edges, 0, 1, 1));
-        System.out.println(findCheapestPrice(n, edges, 0, 1, 1));
+        Assert.assertEquals(200, findCheapestPrice(n, edges, src, dst, k));
+        Assert.assertEquals(500, findCheapestPrice(n, edges, 0, 2, 0));
+    }
+
+    @Test
+    public void test2() {
+        int n = 2;
+        int[][] edges = new int[][]{{1, 0, 5}};
+        int src = 0;
+        int dst = 1;
+        int k = 1;
+        int cheapestPrice = findCheapestPrice(n, edges, src, dst, k);
         System.out.println();
 
     }
+
 
 }

@@ -1,6 +1,11 @@
 package com.zhq.MediumProblem;
 
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -53,7 +58,7 @@ public class Test3 {
 
 
     /**
-     * @Description: 滑动窗口方法，时间复杂度0(n^2),空间复杂度O(n)
+     * @Description: 滑动窗口方法，时间复杂度0(n),空间复杂度O(n)
      * @Param: [s]
      * @return: int
      * @Author: ZHQ
@@ -73,9 +78,41 @@ public class Test3 {
         return maxLength;
     }
 
-
-    public static void main(String[] args) {
-        String input = "pwwkew";
-        System.out.println(lengthOfLongestSubstring(input));
+    /**
+     * 滑动窗口 method 2，与第一个实现方法一致
+     * @param s
+     * @return
+     */
+    public static int lengthOfLongestSubstringSecond(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        char[] sArr = s.toCharArray();
+        int left = 0, right = 0, len = 0;
+        Map<Character, Integer> window = new HashMap<>();
+        while (right < s.length()) {
+            char r = sArr[right];
+            right++;
+            if (!window.containsKey(r)) {
+                window.put(r, 1);
+            } else {
+                while (r != sArr[left]) {
+                    window.remove(sArr[left]);
+                    left++;
+                }
+                left++;
+            }
+            len = Math.max(len, right - left);
+        }
+        return len;
     }
+
+
+    @Test
+    public void test() {
+        Assert.assertEquals(3, lengthOfLongestSubstring("pwwkew"));
+        Assert.assertEquals(3, lengthOfLongestSubstringSecond("pwwkew"));
+
+    }
+
 }
