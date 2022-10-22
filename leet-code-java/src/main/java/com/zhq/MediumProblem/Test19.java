@@ -1,6 +1,8 @@
 package com.zhq.MediumProblem;
 
-import java.time.Period;
+import com.zhq.common.ListNode;
+import com.zhq.util.ListNodeUtils;
+import org.junit.Test;
 
 /**
  * @author : ZHQ
@@ -8,51 +10,23 @@ import java.time.Period;
  */
 public class Test19 {
 
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-    }
-
-    public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        ListNode node2 = new ListNode(2);
-        ListNode node3 = new ListNode(3);
-        ListNode node4 = new ListNode(4);
-        ListNode node5 = new ListNode(5);
-        head.next = node2;
-        node2.next = node3;
-        node3.next = node4;
-        node4.next = node5;
-
-        printList(head);
-        System.out.println();
-
+    @Test
+    public void test() {
+        int[] nums = new int[]{1, 2, 3, 4, 5};
+        ListNode head = ListNodeUtils.constructList(nums);
+        ListNodeUtils.printSingleList(head);
         removeNthFromEnd(head, 2);
-        System.out.println("after delete");
-        printList(head);
+        ListNodeUtils.printSingleList(head);
     }
 
-    public static void printList(ListNode head) {
-        ListNode current = head;
-        while (current != null) {
-            System.out.print(current.val + "->");
-            current = current.next;
-        }
-    }
-
-
-    /** 两个指针，间隔为N，第一个指针为空时，第二个指针就是要删除的位置，注意边界值的判断，当删除的
-     *  节点刚好是头结点的时候，需要特殊处理
+    /**
+     * 两个指针，间隔为N，第一个指针为空时，第二个指针就是要删除的位置，注意边界值的判断，当删除的
+     * 节点刚好是头结点的时候，需要特殊处理
      * @param head
      * @param n
      * @return
      */
-    public static ListNode removeNthFromEnd(ListNode head, int n) {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode first = head;
         ListNode second = head;
         ListNode preSecond = head;

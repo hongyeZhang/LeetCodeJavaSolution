@@ -1,5 +1,7 @@
 package com.zhq.SimpleProblem;
 
+import org.junit.Test;
+
 /**
  * @program: LeetCodeTest
  * @description: 移除元素
@@ -8,7 +10,8 @@ package com.zhq.SimpleProblem;
  **/
 public class Test27 {
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         int[] nums = {0, 1, 2, 2, 3, 0, 4, 2};
         int len = removeElement(nums, 2);
         for (int i = 0; i < len; ++i) {
@@ -23,7 +26,7 @@ public class Test27 {
     * @Author: ZHQ
     * @Date: 2019/6/1
     **/ 
-    public static int removeElement(int[] nums, int val) {
+    public int removeElement(int[] nums, int val) {
         int len = 0;
         for (int i = 0; i < nums.length; ++i) {
             if (nums[i] == val) {
@@ -32,7 +35,24 @@ public class Test27 {
             nums[len] = nums[i];
             len++;
         }
-
         return len;
+    }
+
+    /**
+     * 明显的双指针
+     * @param nums
+     * @param val
+     * @return
+     */
+    public int removeElementSecond(int[] nums, int val) {
+        int slow = 0, fast = 0;
+        while (fast < nums.length) {
+            if (nums[fast] != val) {
+                nums[slow] = nums[fast];
+                slow++;
+            }
+            fast++;
+        }
+        return slow;
     }
 }

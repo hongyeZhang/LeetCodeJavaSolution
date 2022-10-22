@@ -1,5 +1,8 @@
 package com.zhq.SimpleProblem;
 
+import com.zhq.util.PrintUtils;
+import org.junit.Test;
+
 /**
  * @program: LeetCodeTest
  * @description: 删除排序数组中的重复项
@@ -8,14 +11,12 @@ package com.zhq.SimpleProblem;
  **/
 public class Test26 {
 
-    public static void main(String[] args) {
-
+    @Test
+    public void test() {
         int[] nums = {0,0,1,1,1,2,2,3,3,4};
         int len = removeDuplicates(nums);
-        for (int i = 0; i < len; i++) {
-            System.out.print(nums[i] + "\t");
-        }
-
+        System.out.println(len);
+        PrintUtils.printArray(nums);
     }
 
     /**
@@ -25,7 +26,7 @@ public class Test26 {
     * @Author: ZHQ
     * @Date: 2019/6/1
     **/
-    public static int removeDuplicates(int[] nums) {
+    public int removeDuplicates(int[] nums) {
         int len = 0;
         for (int i = 1; i < nums.length; ++i) {
             if (nums[i] == nums[len]) {
@@ -53,7 +54,7 @@ public class Test26 {
 * @Author: ZHQ
 * @Date: 2019/6/1
 **/
-    public static int removeDuplicates2(int[] nums) {
+    public int removeDuplicates2(int[] nums) {
         if (nums.length == 0){ return 0;}
         int i = 0;
         for (int j = 1; j < nums.length; j++) {
@@ -63,6 +64,51 @@ public class Test26 {
             }
         }
         return i + 1;
+    }
+
+    /**
+     * 双指针：快慢指针
+     * @param nums
+     * @return
+     */
+    public int removeDuplicates3(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int currentIndex = 0, fastIndex = 0;
+        int res = 1;
+        for (int i = 0; i < nums.length; ++i) {
+            while (fastIndex < nums.length && nums[fastIndex] <= nums[currentIndex]) {
+                fastIndex++;
+            }
+            if (fastIndex < nums.length) {
+                currentIndex++;
+                swap(nums, currentIndex, fastIndex);
+                res++;
+            }
+        }
+        return res;
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
+    public int removeDuplicates4(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int slow = 0, fast = 0;
+        while (fast < nums.length) {
+            if (nums[fast] != nums[slow]) {
+                slow++;
+                nums[slow] = nums[fast];
+            }
+            fast++;
+        }
+        return slow + 1;
     }
 
 
